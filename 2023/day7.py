@@ -31,7 +31,6 @@ def findHandCategoryWithJokers(hand):
     mostFrequent = max(noJokes, key=noJokes.count)
     newHand = hand.replace('J', mostFrequent)
     category = findHandCategoryNoJokers(newHand)
-    print(f'old hand: {hand}, new hand {newHand} category: {category}')
     return category
 
 
@@ -61,49 +60,42 @@ def comparatorWithJokers(hand1, hand2):
             return -1
 
 
-def solveAdvent13():
+def problem7_1():
     handByCategory = defaultdict(list)
     totalWin = 0
-    with open('input7.txt') as games:
+    with open('inputs/input7.txt') as games:
         for game in games:
             hand, bid = game[:-1].split(' ')
             handCategory = findHandCategoryNoJokers(hand)
             handByCategory[handCategory].append((hand, bid))
-        print(handByCategory)
         winningRate = 1
         for category in range(1, 8):
             hands = handByCategory.get(category)
             if hands:
                 sortedHands = sorted(hands, key=functools.cmp_to_key(comparatorNoJokers))
-                print(sortedHands)
                 for h in sortedHands:
-                    print(f'winning rate {winningRate} with bid {int(h[1])}')
                     totalWin += winningRate * int(h[1])
-                    print(f'total win {totalWin}')
                     winningRate += 1
 
 
-def solveAdvent14():
+def problem7_2():
     handByCategory = defaultdict(list)
     totalWin = 0
-    with open('input7.txt') as games:
+    with open('inputs/input7.txt') as games:
         for game in games:
             hand, bid = game[:-1].split(' ')
             handCategory = findHandCategoryWithJokers(hand)
             handByCategory[handCategory].append((hand, bid))
-        print(f'hands by category: {handByCategory}')
         winningRate = 1
         for category in range(1, 8):
             hands = handByCategory.get(category)
             if hands:
                 sortedHands = sorted(hands, key=functools.cmp_to_key(comparatorWithJokers))
-                print(f'sorted hands for category {category}: {sortedHands}')
                 for h in sortedHands:
-                    # print(f'winning rate {winningRate} with bid {int(h[1])}')
                     totalWin += winningRate * int(h[1])
-                    print(f'total win {totalWin}')
                     winningRate += 1
 
 
 if __name__ == '__main__':
-    print(solveAdvent14())
+    print(problem7_1())
+    print(problem7_2())

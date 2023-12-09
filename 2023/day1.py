@@ -1,9 +1,11 @@
 import re
 
+INPUT_FILE = 'inputs/input1.txt'
 
-def solveAdvent1():
+
+def problem1_1():
     calibrationsSum = 0
-    with open('input1.txt') as calibrations:
+    with open(INPUT_FILE) as calibrations:
         for calibration in calibrations:
             digits = ''.join(c for c in calibration if c.isdigit())
             calibrationsSum += int(digits[0] + digits[-1])
@@ -27,9 +29,9 @@ def getDigit(digit) -> str:
         }[digit]
 
 
-def solveAdvent2():
+def problem1_2():
     calibrationSum = 0
-    with open('input1.txt') as calibrations:
+    with open(INPUT_FILE) as calibrations:
         for calibration in calibrations:
             digitsExtracted = re.findall(r'(?=(one|two|three|four|five|six|seven|eight|nine|\d))', calibration)
             correctCalibration = int(getDigit(digitsExtracted[0]) + getDigit(digitsExtracted[-1]))
@@ -38,5 +40,5 @@ def solveAdvent2():
 
 
 if __name__ == '__main__':
-    print(solveAdvent1())
-    print(solveAdvent2())
+    print(problem1_1())
+    print(problem1_2())

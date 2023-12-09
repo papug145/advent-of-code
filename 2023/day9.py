@@ -1,8 +1,8 @@
 from collections import defaultdict
 
 
-def solveAdvent17():
-    lines = [[int(elem) for elem in line.split()] for line in open('input9.txt').read().splitlines()]
+def problem9_1():
+    lines = [[int(elem) for elem in line.split()] for line in open('inputs/input9.txt').read().splitlines()]
     levels = defaultdict(list)
     results = list()
     for index, line in enumerate(lines):
@@ -17,17 +17,17 @@ def solveAdvent17():
             currentLevel = newLevel
 
         level = levels[index]
-        for i in range(len(level)-1, 0, -1):
+        for i in range(len(level) - 1, 0, -1):
             lastElemBelow = level[i][-1]
-            lastElemAbove = level[i-1][-1]
+            lastElemAbove = level[i - 1][-1]
             newElem = lastElemBelow + lastElemAbove
-            level[i-1].append(newElem)
+            level[i - 1].append(newElem)
         results.append(level[0][-1])
     return sum(results)
 
 
-def solveAdvent18():
-    lines = [[int(elem) for elem in line.split()] for line in open('input9.txt').read().splitlines()]
+def problem9_2():
+    lines = [[int(elem) for elem in line.split()] for line in open('inputs/input9.txt').read().splitlines()]
     levels = defaultdict(list)
     results = list()
     for index, line in enumerate(lines):
@@ -42,14 +42,15 @@ def solveAdvent18():
             currentLevel = newLevel
 
         level = levels[index]
-        for i in range(len(level)-1, 0, -1):
+        for i in range(len(level) - 1, 0, -1):
             firstElemBelow = level[i][0]
-            firstElemAbove = level[i-1][0]
+            firstElemAbove = level[i - 1][0]
             newElem = firstElemAbove - firstElemBelow
-            level[i-1] = [newElem]
+            level[i - 1] = [newElem]
         results.append(level[0][0])
     return sum(results)
 
 
 if __name__ == '__main__':
-    print(solveAdvent18())
+    print(problem9_1())
+    print(problem9_2())
